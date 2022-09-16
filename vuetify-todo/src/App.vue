@@ -52,10 +52,11 @@
 
     <v-main>
       <router-view></router-view>
+      <snackbar />
     </v-main>
 
     <v-footer app>
-      <span class="text-center">&copy; 2019</span>
+      <span class="text-center">&copy; 2022</span>
     </v-footer>
   </v-app>
 </template>
@@ -70,5 +71,8 @@ export default {
       { title: "About", icon: "mdi-help-box", to: "/about" },
     ],
   }),
+  components: {
+    snackbar: require("@/components/Shared/Snackbar.vue").default,
+  },
 };
 </script>
