@@ -1,9 +1,14 @@
 <template>
   <v-snackbar v-model="$store.state.snackbar.show">
-    {{ text }}
+    {{ $store.state.snackbar.message }}
 
     <template v-slot:action="{ attrs }">
-      <v-btn color="red" text v-bind="attrs" @click="snackbar = false">
+      <v-btn
+        color="red"
+        text
+        v-bind="attrs"
+        @click="$store.state.snackbar.show = false"
+      >
         Close
       </v-btn>
     </template>
@@ -13,9 +18,6 @@
 <script>
 export default {
   name: "Snackbar",
-  data: () => ({
-    text: `Task Added!`,
-  }),
 };
 </script>
 
