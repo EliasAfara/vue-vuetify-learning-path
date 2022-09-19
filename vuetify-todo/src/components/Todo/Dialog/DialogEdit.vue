@@ -15,7 +15,13 @@
       <v-card-actions>
         <v-spacer></v-spacer>
         <v-btn text @click="$emit('close')"> Cancel </v-btn>
-        <v-btn color="primary darken-1" text @click="saveUpdatedTask">
+
+        <v-btn
+          color="primary darken-1"
+          text
+          @click="saveUpdatedTask"
+          :disabled="taskTitleInvalidCheck"
+        >
           Save
         </v-btn>
       </v-card-actions>
@@ -32,14 +38,21 @@ export default {
       taskTitle: null,
     };
   },
+  computed: {
+    taskTitleInvalidCheck() {
+      return !this.taskTitle || this.taskTitle === this.task.title;
+    },
+  },
   methods: {
     saveUpdatedTask() {
-      this.$emit("close");
-      let payload = {
-        id: this.task.id,
-        title: this.taskTitle,
-      };
-      this.$store.dispatch("updateTaskTitleAction", payload);
+      if (!this.taskTitleInvalidCheck) {
+        this.$emit("close");
+        let payload = {
+          id: this.task.id,
+          title: this.taskTitle,
+        };
+        this.$store.dispatch("updateTaskTitleAction", payload);
+      }
     },
   },
   mounted: function () {
